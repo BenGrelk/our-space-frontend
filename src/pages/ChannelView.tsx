@@ -1,7 +1,8 @@
 import {useParams} from "react-router-dom";
 import {useQuery} from "@tanstack/react-query";
-import {fetchChannel, fetchPostsForChannel} from "../utils.ts";
+import {fetchChannel, fetchPostsForChannel} from "../utils/utils.ts";
 import {Link} from "@mui/material";
+import {ChannelQuery} from "../utils/types.ts";
 
 interface ChannelViewParams {
     channelId: number;
@@ -10,7 +11,7 @@ interface ChannelViewParams {
 export default function ChannelView() {
     const {channelId} = useParams() as unknown as ChannelViewParams;
 
-    const {isPending: channelIsPending, error: channelError, data: channel} = useQuery({
+    const {isPending: channelIsPending, error: channelError, data: channel}: ChannelQuery = useQuery({
         queryKey: ['channel', channelId],
         queryFn: () => fetchChannel(channelId),
     });
@@ -23,6 +24,7 @@ export default function ChannelView() {
     if (channelIsPending || postsIsPending) return <div>Loading...</div>
     if (channelError) return <div>Error: {channelError.message}</div>
     if (postsError) return <div>Error: {postsError.message}</div>
+    if (!channel) return <div>No channel</div>
 
     return (
         <>

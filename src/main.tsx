@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import './index.css'
+import './styles/index.sass'
 import {
     createBrowserRouter,
     RouterProvider,
@@ -9,6 +9,7 @@ import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 import Channels from "./pages/Channels.tsx";
 import {createTheme, ThemeProvider} from "@mui/material";
 import ChannelView from "./pages/ChannelView.tsx";
+import Page from "./Page.tsx";
 
 const queryClient = new QueryClient()
 
@@ -16,11 +17,19 @@ const queryClient = new QueryClient()
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <Channels/>
+        element: <Page element={<Channels />}/>
+    },
+    {
+        path: "/channels",
+        element: <Page element={<Channels />}/>
     },
     {
         path: "/channel/:channelId",
-        element: <ChannelView />
+        element: <Page element={<ChannelView />}/>
+    },
+    {
+        path: "/channels/new",
+        element: <div>New Channel</div>
     }
 ]);
 

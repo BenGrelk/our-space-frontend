@@ -1,7 +1,7 @@
 import axios, {AxiosResponse} from 'axios';
-import { Channel } from './models/channel.ts';
+import { Channel } from '../models/channel.ts';
 import { apiUrl } from './constants.ts';
-import {Post} from "./models/Post.ts";
+import {Post} from "../models/Post.ts";
 
 export async function fetchChannels(): Promise<Channel[]> {
     const res = await axios.get(apiUrl + '/channels/all');
