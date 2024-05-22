@@ -6,7 +6,6 @@ import {CreateChannelModel} from "../models/CreateChannelModel.ts";
 import {User} from "../models/User.ts";
 import {CreatePostModel} from "../models/CreatePostModel.ts";
 import {SignInModel} from "../models/SignInModel.ts";
-import {CreateAccountModel} from "../models/CreateAccountModel.ts";
 import {CreateUserModel} from "../models/CreateUserModel.ts";
 
 export async function fetchChannels(): Promise<Channel[]> {

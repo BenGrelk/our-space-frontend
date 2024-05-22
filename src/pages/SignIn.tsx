@@ -3,7 +3,6 @@ import {signIn} from "../utils/utils.ts";
 import {SignInModel} from "../models/SignInModel.ts";
 import {Link} from "@mui/material";
 import {ReactElement} from "react";
-import {types} from "sass";
 
 export default function SignIn(): ReactElement {
     const {

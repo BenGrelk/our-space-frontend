@@ -1,6 +1,5 @@
 import {ReactElement} from "react";
 import {SubmitHandler, useForm} from "react-hook-form";
-import {SignInModel} from "../models/SignInModel.ts";
 import {CreateUserModel} from "../models/CreateUserModel.ts";
 import {signUp} from "../utils/utils.ts";
 
@@ -16,9 +15,8 @@ export default function SignUp(): ReactElement {
             console.log(data);
             await signUp(data);
             window.location.href = '/channels';
-        } catch (error: any) {
+        } catch (error) {
             if (error.response && error.response.status === 401) {
-                // Handle invalid credentials error
                 console.error("Invalid credentials. Please try again.");
             } else {
                 console.error(error);
