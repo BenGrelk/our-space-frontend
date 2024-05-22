@@ -1,12 +1,13 @@
 import {useParams} from "react-router-dom";
 import {useQuery} from "@tanstack/react-query";
-import {createChannel, createPost, fetchChannel, fetchPostsForChannel} from "../utils/utils.ts";
 import {Grid, Link} from "@mui/material";
 import {ChannelQuery} from "../utils/types.ts";
 import PostCard from "../components/PostCard.tsx";
 import {SubmitHandler, useForm} from "react-hook-form";
-import {CreateChannelModel} from "../models/CreateChannelModel.ts";
 import {CreatePostModel} from "../models/CreatePostModel.ts";
+import {createPost, fetchChannel, fetchPostsForChannel, getUserId} from "../utils/utils.ts";
+
+import '../styles/ChannelView.sass';
 
 interface ChannelViewParams {
     channelId: number;
@@ -21,10 +22,11 @@ export default function ChannelView() {
         formState: {errors},
     } = useForm<CreatePostModel>()
     const onSubmit: SubmitHandler<CreatePostModel> = (data: CreatePostModel) => {
-        createPost(channelId, data);
+        createPost(channelId, data).then(() => window.location.reload());
     }
 
-    const userId: number = 1;
+    const userId: number = getUserId();
+    console.log(userId);
 
     const {isPending: channelIsPending, error: channelError, data: channel}: ChannelQuery = useQuery({
         queryKey: ['channel', channelId],
@@ -52,7 +54,7 @@ export default function ChannelView() {
                     {errors.message && <span>This field is required</span>}
                 </label>
                 <input hidden value={userId} {...register("userId", {required: true})} />
-                {errors.userId && <span>This field is required</span>}
+                {errors.userId && <span>You must be signed in.</span>}
                 <button type="submit">Create Post</button>
             </form>
 

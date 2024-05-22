@@ -4,7 +4,7 @@ import {useForm, SubmitHandler} from "react-hook-form"
 import '../styles/CreateChannel.sass';
 import {Button} from "@mui/material";
 import {CreateChannelModel} from "../models/CreateChannelModel.ts";
-import {createChannel} from "../utils/utils.ts";
+import {createChannel, getUserId} from "../utils/utils.ts";
 
 export default function CreateChannel(): ReactElement {
     const {
@@ -16,7 +16,7 @@ export default function CreateChannel(): ReactElement {
         createChannel(data).then(() => window.location.href = '/channels');
     }
 
-    const userId: number = 1;
+    const userId: number = getUserId();
 
     return (
         <div className="create-channel">

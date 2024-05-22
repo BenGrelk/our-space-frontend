@@ -5,7 +5,6 @@ import {fetchUser, formatDate} from "../utils/utils.ts";
 import {useQuery} from "@tanstack/react-query";
 
 export default function PostCard({post}: { post: Post }): ReactElement {
-    // Get user from post.createdByUserId
     const {isPending, error, data} = useQuery({
         queryKey: ['user', post.creatorUserId],
         queryFn: () => fetchUser(post.creatorUserId),
