@@ -1,10 +1,10 @@
 import {Card, CardContent, Typography, CardActionArea, Box} from "@mui/material";
-import {Channel} from "../models/channel.ts";
+import {Channel} from "../models/Channel.ts";
 import {NavigateFunction, useNavigate} from "react-router-dom";
-import {fetchPostsForChannel} from "../utils/utils.ts";
+import {fetchPostsForChannel, formatDate} from "../utils/utils.ts";
 import {useQuery} from "@tanstack/react-query";
 import {ReactElement} from "react";
-import {PostQuery} from "../utils/types.ts";
+import {PostsQuery} from "../utils/types.ts";
 
 interface ChannelCardProps {
     channel: Channel;
@@ -13,7 +13,7 @@ interface ChannelCardProps {
 export default function ChannelCard({channel}: ChannelCardProps): ReactElement {
     const navigate: NavigateFunction = useNavigate();
 
-    const {isPending, error, data}: PostQuery = useQuery({
+    const {isPending, error, data}: PostsQuery = useQuery({
         queryKey: ['channelPosts', channel.channelId],
         queryFn: () => fetchPostsForChannel(channel.channelId),
     });
@@ -24,9 +24,6 @@ export default function ChannelCard({channel}: ChannelCardProps): ReactElement {
 
     const numPosts: number = data.length;
 
-    const date: Date = new Date(channel.createdAt);
-    const formattedDate: string = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()} at ${date.getHours()}:${date.getMinutes()}`;
-
     return (
         <Card className="channel-card">
             <CardActionArea onClick={() => navigate(`/channel/${channel.channelId}`)}>
@@ -36,7 +33,7 @@ export default function ChannelCard({channel}: ChannelCardProps): ReactElement {
                             {channel.channelName}
                         </Typography>
                         <Typography color="textSecondary" align="right">
-                            {formattedDate}
+                            {formatDate(channel.createdAt)}
                         </Typography>
                     </Box>
                     <Typography color="textSecondary">

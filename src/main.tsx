@@ -10,6 +10,7 @@ import Channels from "./pages/Channels.tsx";
 import {createTheme, ThemeProvider} from "@mui/material";
 import ChannelView from "./pages/ChannelView.tsx";
 import Page from "./Page.tsx";
+import CreateChannel from "./pages/CreateChannel.tsx";
 
 const queryClient = new QueryClient()
 
@@ -29,7 +30,7 @@ const router = createBrowserRouter([
     },
     {
         path: "/channels/new",
-        element: <div>New Channel</div>
+        element: <Page element={<CreateChannel/>}/>
     }
 ]);
 

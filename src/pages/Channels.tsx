@@ -4,7 +4,6 @@ import ChannelCard from "../components/ChannelCard.tsx";
 import {Button, Grid} from "@mui/material";
 
 import '../styles/Channels.sass';
-import {Channel} from "../models/channel.ts";
 import {ReactElement} from "react";
 import {ChannelsQuery} from "../utils/types.ts";
 

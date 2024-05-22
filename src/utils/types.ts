@@ -1,5 +1,5 @@
 import {Post} from "../models/Post.ts";
-import {Channel} from "../models/channel.ts";
+import {Channel} from "../models/Channel.ts";
 
 export type PostsQuery = {
     isPending: boolean;
